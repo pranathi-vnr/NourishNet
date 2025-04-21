@@ -24,7 +24,7 @@ const featuredPantries = [
     state: "CA",
     zip: "94110",
     needs: ["Vegetables", "Fruits", "Hygiene Products"],
-    image: "https://images.unsplash.com/photo-1578916171728-46686eac8d8d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
   },
   {
     id: "3",

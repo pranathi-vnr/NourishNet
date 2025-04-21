@@ -5,93 +5,15 @@ import PantryCard from "@/components/PantryCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-
-// Mock data for pantries
-const allPantries = [
-  {
-    id: "1",
-    name: "Community Food Bank",
-    address: "123 Main St",
-    city: "Oakland",
-    state: "CA",
-    zip: "94612",
-    needs: ["Canned Goods", "Rice", "Pasta", "Baby Food"],
-    image: "https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "2",
-    name: "Hope Pantry Center",
-    address: "456 Elm St",
-    city: "San Francisco",
-    state: "CA",
-    zip: "94110",
-    needs: ["Vegetables", "Fruits", "Hygiene Products"],
-    image: "https://images.unsplash.com/photo-1576976108824-a8e11d25e782?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "3",
-    name: "Nourish Neighborhood Pantry",
-    address: "789 Oak St",
-    city: "Berkeley",
-    state: "CA",
-    zip: "94704",
-    needs: ["Protein Items", "Dairy", "Cereal", "Cooking Oil"],
-    image: "https://images.unsplash.com/photo-1615397587950-3cbb55f95d8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "4",
-    name: "Sunset District Food Assistance",
-    address: "321 Sunset Blvd",
-    city: "San Francisco",
-    state: "CA",
-    zip: "94116",
-    needs: ["Canned Soups", "Bread", "Peanut Butter", "Jelly"],
-    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "5",
-    name: "East Bay Food Project",
-    address: "555 College Ave",
-    city: "Oakland",
-    state: "CA",
-    zip: "94618",
-    needs: ["Grains", "Fresh Produce", "Diapers", "Formula"],
-    image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: "6",
-    name: "Mission Neighborhood Center",
-    address: "444 Valencia St",
-    city: "San Francisco",
-    state: "CA",
-    zip: "94103",
-    needs: ["Beans", "Rice", "Tortillas", "Cooking Oil"],
-    image: "https://images.unsplash.com/photo-1528498033373-3c6c08e93d79?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-  }
-];
+import { usePantries } from "@/hooks/usePantries";
 
 const Pantries = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredPantries, setFilteredPantries] = useState(allPantries);
+  const { data: pantries = [], isLoading, error } = usePantries(searchQuery);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!searchQuery.trim()) {
-      setFilteredPantries(allPantries);
-      return;
-    }
-    
-    const query = searchQuery.toLowerCase();
-    const results = allPantries.filter(
-      pantry => 
-        pantry.name.toLowerCase().includes(query) ||
-        pantry.city.toLowerCase().includes(query) ||
-        pantry.state.toLowerCase().includes(query) ||
-        pantry.zip.includes(query)
-    );
-    
-    setFilteredPantries(results);
+    // The search is handled automatically by the hook when searchQuery changes
   };
 
   return (
@@ -131,29 +53,39 @@ const Pantries = () => {
       {/* Results Section */}
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold">
-              {filteredPantries.length} {filteredPantries.length === 1 ? 'Pantry' : 'Pantries'} Found
-            </h2>
-          </div>
-          
-          {filteredPantries.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPantries.map(pantry => (
-                <PantryCard key={pantry.id} {...pantry} />
-              ))}
+          {isLoading ? (
+            <div className="text-center py-16">
+              <p className="text-xl text-gray-600">Loading pantries...</p>
+            </div>
+          ) : error ? (
+            <div className="text-center py-16">
+              <h3 className="text-xl font-medium text-red-600 mb-4">Error loading pantries</h3>
+              <p className="text-gray-500">Please try again later.</p>
             </div>
           ) : (
-            <div className="text-center py-16">
-              <h3 className="text-xl font-medium text-gray-600 mb-4">No pantries found matching your search.</h3>
-              <p className="text-gray-500 mb-6">Try adjusting your search terms or browse all pantries.</p>
-              <Button onClick={() => {
-                setSearchQuery("");
-                setFilteredPantries(allPantries);
-              }}>
-                View All Pantries
-              </Button>
-            </div>
+            <>
+              <div className="mb-8">
+                <h2 className="text-2xl font-semibold">
+                  {pantries.length} {pantries.length === 1 ? 'Pantry' : 'Pantries'} Found
+                </h2>
+              </div>
+              
+              {pantries.length > 0 ? (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {pantries.map(pantry => (
+                    <PantryCard key={pantry.id} {...pantry} />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-16">
+                  <h3 className="text-xl font-medium text-gray-600 mb-4">No pantries found matching your search.</h3>
+                  <p className="text-gray-500 mb-6">Try adjusting your search terms or browse all pantries.</p>
+                  <Button onClick={() => setSearchQuery("")}>
+                    View All Pantries
+                  </Button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>

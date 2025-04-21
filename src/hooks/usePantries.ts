@@ -37,7 +37,7 @@ const mockPantries: Pantry[] = [
     email: "contact@hopepantry.org",
     website: "https://www.hopepantry.org",
     needs: ["Vegetables", "Fruits", "Dairy Products"],
-    image: "https://images.unsplash.com/photo-1576976108824-a8e11d25e782?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80",
+    image: "https://images.unsplash.com/photo-1578916171728-46686eac8d8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80",
     hours: [
       { day: "Monday", hours: "10:00 AM - 6:00 PM" },
       { day: "Tuesday", hours: "10:00 AM - 6:00 PM" },

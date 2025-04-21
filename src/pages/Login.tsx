@@ -1,21 +1,53 @@
 
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Layout from "@/components/layout/Layout";
-import { useState } from "react";
+import { supabase } from "@/lib/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { toast } = useToast();
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would normally handle login logic
-    console.log("Login attempt with:", { email, password });
-    // For demo purposes, just show a success message
-    alert("Login functionality would be implemented here");
+    setLoading(true);
+    
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Success",
+          description: "You have been logged in successfully",
+        });
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
   
   return (
@@ -55,8 +87,12 @@ const Login = () => {
                 />
               </div>
               
-              <Button type="submit" className="w-full bg-nourish-600 hover:bg-nourish-700">
-                Log In
+              <Button 
+                type="submit" 
+                className="w-full bg-nourish-600 hover:bg-nourish-700"
+                disabled={loading}
+              >
+                {loading ? "Logging in..." : "Log In"}
               </Button>
             </form>
             

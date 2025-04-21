@@ -42,6 +42,36 @@ const mockPantries: Pantry[] = [
       { day: "Tuesday", hours: "10:00 AM - 6:00 PM" },
       { day: "Wednesday", hours: "10:00 AM - 6:00 PM" }
     ]
+  },
+  {
+    id: "3",
+    name: "Nourish Neighborhood Pantry",
+    description: "Nourish Neighborhood Pantry is a volunteer-run food distribution center serving Berkeley and surrounding communities. We offer both emergency food assistance and regular distribution programs.",
+    address: "789 Oak St",
+    city: "Berkeley", 
+    state: "CA",
+    zip: "94704",
+    phone: "(510) 555-4321",
+    email: "hello@nourishpantry.org",
+    website: "https://www.nourishpantry.org",
+    needs: [
+      "Protein Items",
+      "Dairy",
+      "Cereal",
+      "Cooking Oil",
+      "Spices",
+      "Coffee",
+      "Tea",
+      "Soup"
+    ],
+    image: "https://images.unsplash.com/photo-1593113630400-ea4288922497?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80",
+    hours: [
+      { day: "Monday", hours: "9:00 AM - 5:00 PM" },
+      { day: "Tuesday", hours: "9:00 AM - 5:00 PM" },
+      { day: "Wednesday", hours: "9:00 AM - 5:00 PM" },
+      { day: "Thursday", hours: "9:00 AM - 5:00 PM" },
+      { day: "Friday", hours: "9:00 AM - 5:00 PM" }
+    ]
   }
 ]
 

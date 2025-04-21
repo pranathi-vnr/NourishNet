@@ -1,22 +1,60 @@
 
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Layout from "@/components/layout/Layout";
-import { useState } from "react";
+import { supabase } from "@/lib/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { toast } = useToast();
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would normally handle registration logic
-    console.log("Registration attempt with:", { name, email, password });
-    // For demo purposes, just show a success message
-    alert("Registration functionality would be implemented here");
+    setLoading(true);
+    
+    try {
+      // Register the user with Supabase
+      const { error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: name,
+          }
+        }
+      });
+
+      if (signUpError) {
+        toast({
+          title: "Error",
+          description: signUpError.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Success",
+          description: "Registration successful. Please check your email for confirmation.",
+        });
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
   
   return (
@@ -63,8 +101,12 @@ const Register = () => {
                 />
               </div>
               
-              <Button type="submit" className="w-full bg-nourish-600 hover:bg-nourish-700">
-                Sign Up
+              <Button 
+                type="submit" 
+                className="w-full bg-nourish-600 hover:bg-nourish-700"
+                disabled={loading}
+              >
+                {loading ? "Creating account..." : "Sign Up"}
               </Button>
             </form>
             

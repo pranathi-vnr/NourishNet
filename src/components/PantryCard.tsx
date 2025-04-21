@@ -23,6 +23,10 @@ const PantryCard = ({ id, name, address, city, state, zip, needs, image }: Pantr
           src={image} 
           alt={name} 
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+          onError={(e) => {
+            // Fallback to a placeholder image if the original fails to load
+            e.currentTarget.src = "https://images.unsplash.com/photo-1615397587950-3cbb55f95d8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
+          }}
         />
       </div>
       
@@ -58,7 +62,7 @@ const PantryCard = ({ id, name, address, city, state, zip, needs, image }: Pantr
             </Link>
           </Button>
           <Button asChild className="bg-nourish-600 hover:bg-nourish-700">
-            <Link to={`/donate/${id}`}>Donate</Link>
+            <Link to={`/donate`}>Donate</Link>
           </Button>
         </div>
       </div>

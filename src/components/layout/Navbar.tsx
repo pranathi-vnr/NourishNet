@@ -41,13 +41,17 @@ const Navbar = () => {
 
         {/* Action Buttons */}
         <div className="hidden md:flex items-center gap-4">
-          <Button variant="outline" size="sm" className="gap-2">
-            <User size={18} />
-            Login
+          <Button variant="outline" size="sm" className="gap-2" asChild>
+            <Link to="/login">
+              <User size={18} />
+              Login
+            </Link>
           </Button>
-          <Button size="sm" className="bg-nourish-600 hover:bg-nourish-700 gap-2">
-            Get Started
-            <ArrowRight size={16} />
+          <Button size="sm" className="bg-nourish-600 hover:bg-nourish-700 gap-2" asChild>
+            <Link to="/register">
+              Get Started
+              <ArrowRight size={16} />
+            </Link>
           </Button>
         </div>
 
@@ -93,13 +97,17 @@ const Navbar = () => {
               Contact
             </Link>
             <div className="pt-3 flex flex-col gap-3">
-              <Button variant="outline" size="sm" className="w-full justify-center gap-2">
-                <User size={18} />
-                Login
+              <Button variant="outline" size="sm" className="w-full justify-center gap-2" asChild>
+                <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                  <User size={18} />
+                  Login
+                </Link>
               </Button>
-              <Button size="sm" className="w-full bg-nourish-600 hover:bg-nourish-700 justify-center gap-2">
-                Get Started
-                <ArrowRight size={16} />
+              <Button size="sm" className="w-full bg-nourish-600 hover:bg-nourish-700 justify-center gap-2" asChild>
+                <Link to="/register" onClick={() => setIsMenuOpen(false)}>
+                  Get Started
+                  <ArrowRight size={16} />
+                </Link>
               </Button>
             </div>
           </div>

@@ -11,6 +11,9 @@ import PantryDetail from "./pages/PantryDetail";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Donate from "./pages/Donate";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +29,10 @@ const App = () => (
           <Route path="/pantries/:id" element={<PantryDetail />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/donate" element={<Donate />} />
+          <Route path="/donate/:id" element={<Donate />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           {/* Other routes can be added here */}
           <Route path="*" element={<NotFound />} />
         </Routes>

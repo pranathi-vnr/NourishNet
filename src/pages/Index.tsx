@@ -10,14 +10,12 @@ import CTASection from "@/components/home/CTASection";
 const Index = () => {
   return (
     <Layout>
-      <div className="w-full">
-        <Hero />
-        <Features />
-        <FeaturedPantries />
-        <ImpactStats />
-        <Testimonials />
-        <CTASection />
-      </div>
+      <Hero />
+      <Features />
+      <FeaturedPantries />
+      <ImpactStats />
+      <Testimonials />
+      <CTASection />
     </Layout>
   );
 };

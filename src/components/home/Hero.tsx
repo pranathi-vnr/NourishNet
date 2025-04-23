@@ -5,13 +5,13 @@ import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section className="relative bg-gradient-to-b from-white to-gray-50 py-20 overflow-hidden">
+    <section className="relative bg-gradient-to-b from-white to-gray-50 py-20 w-full overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 z-0 opacity-10">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMjIiIGZpbGwtb3BhY2l0eT0iLjA1Ij48cGF0aCBkPSJNMzYgMzRoLTJ2LTRoMnY0em0wLTZ2LTEwaDJ2MTBoLTJ6bTAgMTZ2LTZoMnY2aC0yem0tMTggNmgtNFY0MGg0djEwem0wLTE2aC00VjIwaDR2MTB6bTAtMTZoLTRWNGg0djEweiIvPjwvZz48L2c+PC9zdmc+')] bg-repeat" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10 w-full">
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
           {/* Text Content */}
           <div className="lg:w-1/2 text-center lg:text-left">

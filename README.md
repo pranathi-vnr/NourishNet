@@ -47,8 +47,6 @@ nourishnet/
 ---
 ## 📸 Screenshots
 
-## 📸 Screenshots
-
 ### Application Preview
 
 ![](ss/1.png)

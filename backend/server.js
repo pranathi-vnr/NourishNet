@@ -37,11 +37,11 @@ app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).json({ success: false, message: err.message || 'Internal server error' });
 });
 app.get("/", (req,res)=>{
-  res.send("NourishNet API running 🚀")
+  res.send("NourishNet API running")
 })
 
 // 404
 app.use('*', (req, res) => res.status(404).json({ success: false, message: 'Route not found' }));
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 NourishNet API running on port ${PORT}`));
+app.listen(PORT, () => console.log(`NourishNet API running on port ${PORT}`));

@@ -49,11 +49,9 @@ nourishnet/
 
 ## 📸 Screenshots
 
-### Additional Screen
+### Application Preview
 
 ![](ss/1.png)
-
-### Application Preview
 
 | | |
 |---|---|
